@@ -1,6 +1,22 @@
 # Cloud Capture Components
 
-A set of react components to easily manage images with the cloud capture API. Check out some [live examples here](https://google.com)
+A set of react components to easily manage images with the cloud capture API. Check out some [live examples here](https://www.cloudcapture.io/docs/components)
+
+## Installation
+
+Install with npm or yarn
+
+NPM
+
+```
+npm i cloud-capture-components
+```
+
+Yarn
+
+```
+yarn add cloud-capture-components
+```
 
 ## Signing uploads
 
