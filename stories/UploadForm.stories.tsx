@@ -46,7 +46,7 @@ const Template: Story<IUploadProps> = args => (
         )
           .then(res => res.json())
           .then(res => {
-            return res;
+            return res.uploadToken;
           });
       }}
       onUploadStart={() => {

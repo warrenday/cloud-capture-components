@@ -3,13 +3,12 @@ import { useEffect, useState } from 'react';
 import { PresignedPostData, UploadService } from '../services/UploadService';
 
 export type UploadStatus = 'in_progress' | 'success' | 'error';
-export type RequestUpload = (
-  imageName: string
-) => Promise<{
+export type UploadRequestData = {
   imageName: string;
   sourceName: string;
   presignedPostData: PresignedPostData;
-}>;
+};
+export type RequestUpload = (imageName: string) => Promise<string>;
 export interface Upload<E> {
   id: string;
   status: UploadStatus;
@@ -40,6 +39,10 @@ type UseUploadReturn<E> = [
   }
 ];
 
+const processUploadRequest = (uploadRequestData: string): UploadRequestData => {
+  return JSON.parse(atob(uploadRequestData));
+};
+
 const getTotalProgress = (uploadEntries: Upload<{}>[]) => {
   if (!uploadEntries.length) {
     return 0;
@@ -54,12 +57,11 @@ const getTotalProgress = (uploadEntries: Upload<{}>[]) => {
 };
 
 const createFinishedUpload = (
-  uploadEntry: Upload<{ file: File }>,
-  error?: Error
+  uploadEntry: Upload<{ file: File }>
 ): FinishedUpload => {
-  const { entry, imageName, sourceName } = uploadEntry;
+  const { entry, imageName, sourceName, error } = uploadEntry;
   return {
-    url: `https://cdn.cloudcapture.io/${sourceName}/${imageName}`,
+    url: error ? '' : `https://cdn.cloudcapture.io/${sourceName}/${imageName}`,
     file: entry.file,
     error: error || null,
   };
@@ -132,6 +134,7 @@ export const useUpload = <E extends { name: string; file: File }>(
       });
 
       onRequestUpload(uploadEntry.entry.name)
+        .then(processUploadRequest)
         .then(({ imageName, sourceName, presignedPostData }) => {
           updateUploadEntry(uploadEntry.id, { imageName, sourceName });
 
@@ -140,8 +143,8 @@ export const useUpload = <E extends { name: string; file: File }>(
             presignedPostData,
           });
         })
-        .catch(() => {
-          updateUploadEntry(uploadEntry.id, { status: 'error' });
+        .catch(error => {
+          updateUploadEntry(uploadEntry.id, { status: 'error', error });
         });
 
       // Store uploaders in state so we can remove event listeners

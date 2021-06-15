@@ -55,11 +55,13 @@ describe('Upload', () => {
         dropText="drop images here"
         onRequestUpload={async () => {
           await wait(100);
-          return {
-            sourceName: '',
-            imageName: '',
-            presignedPostData: { url: '/upload/url', fields: {} },
-          };
+          return btoa(
+            JSON.stringify({
+              sourceName: '',
+              imageName: '',
+              presignedPostData: { url: '/upload/url', fields: {} },
+            })
+          );
         }}
         onUploadStart={() => {}}
         onUploadEnd={() => {}}
@@ -87,11 +89,13 @@ describe('Upload', () => {
         dropText="drop images here"
         onRequestUpload={async () => {
           await wait(100);
-          return {
-            sourceName: '',
-            imageName: '',
-            presignedPostData: { url: '/upload/url', fields: {} },
-          };
+          return btoa(
+            JSON.stringify({
+              sourceName: '',
+              imageName: '',
+              presignedPostData: { url: '/upload/url', fields: {} },
+            })
+          );
         }}
         onUploadStart={() => {}}
         onUploadEnd={() => {}}
@@ -120,11 +124,13 @@ describe('Upload', () => {
         dropText="drop images here"
         onRequestUpload={async () => {
           await wait(100);
-          return {
-            sourceName: '',
-            imageName: '',
-            presignedPostData: { url: '/upload/url', fields: {} },
-          };
+          return btoa(
+            JSON.stringify({
+              sourceName: '',
+              imageName: '',
+              presignedPostData: { url: '/upload/url', fields: {} },
+            })
+          );
         }}
         onUploadStart={() => {}}
         onUploadEnd={() => {}}
@@ -153,11 +159,13 @@ describe('Upload', () => {
         dropText="drop images here"
         onRequestUpload={async () => {
           await wait(100);
-          return {
-            sourceName: '',
-            imageName: '',
-            presignedPostData: { url: '/upload/url', fields: {} },
-          };
+          return btoa(
+            JSON.stringify({
+              sourceName: '',
+              imageName: '',
+              presignedPostData: { url: '/upload/url', fields: {} },
+            })
+          );
         }}
         onUploadStart={() => {}}
         onUploadEnd={() => {}}
@@ -194,11 +202,13 @@ describe('Upload', () => {
         dropText="drop images here"
         onRequestUpload={async imageName => {
           await wait(100);
-          return {
-            sourceName: 'cloud',
-            imageName,
-            presignedPostData: { url: '/upload/url', fields: {} },
-          };
+          return btoa(
+            JSON.stringify({
+              sourceName: 'cloud',
+              imageName,
+              presignedPostData: { url: '/upload/url', fields: {} },
+            })
+          );
         }}
         onUploadStart={() => {}}
         onUploadEnd={mockOnUploadEnd}
