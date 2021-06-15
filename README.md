@@ -18,10 +18,6 @@ Yarn
 yarn add cloud-capture-components
 ```
 
-## Signing uploads
-
-Uploads are made directly from the browser to your configured source. To obtain a signed payload for upload you need to call `https://api.cloudcapture.io/{source_name}/upload/sign?apiKey=1234` securely from your own server.
-
 ## Upload Form
 
 Use the upload form to easily upload one or many images to your configured source.
@@ -31,7 +27,7 @@ Use the upload form to easily upload one or many images to your configured sourc
 ```jsx
 <UploadForm
   onRequestUpload={() => {
-    // Within your own server call https://api.cloudcapture.io/{source_name}/upload/sign?apiKey=1234
+    // Within your own server call https://api.cloudcapture.io/{source_name}/upload/sign?apiKey={api_key}
     return fetch('http://localhost:3000/get-signed-payload')
       .then(res => res.json())
       .then(res => res);
@@ -47,3 +43,13 @@ Use the upload form to easily upload one or many images to your configured sourc
 | onRequestUpload \* | () => Promise<UploadPayload> | Request for a signed payload |
 | onUploadStart      | () => void                   | Called when upload begins    |
 | onUploadEnd        | () => Entries                | Called when upload ends      |
+
+## Signing uploads
+
+Uploads are made directly from the browser to your configured source. To obtain an uploadToken you need to call the cloud capture api `https://api.cloudcapture.io/{source_name}/upload/sign?apiKey={api_key}` securely from your own server.
+
+```
+POST https://api.cloudcapture.io/{source_name}/upload/sign?apiKey={api_key}
+```
+
+You're api_key can be found at the cloud capture dashboard.
