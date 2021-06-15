@@ -68,4 +68,4 @@ Uploads are made directly from the browser to your configured source. To obtain 
 POST https://api.cloudcapture.io/{source_name}/upload/sign?apiKey={api_key}
 ```
 
-You're api_key can be found at the cloud capture dashboard.
+Your api_key can be found at the cloud capture dashboard.
