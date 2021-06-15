@@ -2,6 +2,8 @@
 
 A set of react components to easily manage images with the cloud capture API. Check out some [live examples here](https://www.cloudcapture.io/docs/components)
 
+![Upload Form example](docs/upload-example.png)
+
 ## Installation
 
 Install with npm or yarn
@@ -16,6 +18,20 @@ Yarn
 
 ```
 yarn add cloud-capture-components
+```
+
+## Setup
+
+Add the provider to the root of your application
+
+```jsx
+import { Provider, UploadForm } from 'cloud-capture-components';
+
+const App = () => (
+  <Provider>
+    <UploadForm {...props} />
+  </Provider>
+);
 ```
 
 ## Upload Form
